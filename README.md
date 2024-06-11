@@ -60,7 +60,7 @@
     composer install
     ```
 
-4. Настройте подключение к базе данных в файле `config/database.php`:
+4. Настройте подключение к базе данных в файле `test.php`:
     ```php
     return [
         'host' => 'localhost',
@@ -70,26 +70,3 @@
     ];
     ```
 
-5. Создайте таблицы в базе данных, выполнив SQL-запросы из файла `database/schema.sql`.
-
-## Использование
-
-Пример использования классов для создания процесса и добавления полей:
-
-```php
-require 'vendor/autoload.php';
-
-use App\Database;
-use App\Field;
-use App\Process;
-
-$config = require 'config/database.php';
-$db = new Database($config);
-
-// Создание процесса и добавление полей
-$process = new Process('Test Process');
-$process->addField(new Field('Text', 'text', 'Sample Text'));
-$process->addField(new Field('Number', 'number', 123, '%d'));
-$process->addField(new Field('Date', 'date', '2024-06-11', 'Y-m-d'));
-
-$process->save($db);
